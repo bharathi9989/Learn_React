@@ -12,7 +12,6 @@ h1 {
   margin-top: 0;
   font-size: 100px;
   padding-inline-start: 400px;
-
 }
 
 h2 {
@@ -47,12 +46,4 @@ code {
 ul {
   padding-inline-start: 400px;
   font-size: 50px;
-}
-
-button {
-  height: 80px;
-  width: 200px;
-  font-size: 50px;
-  text-shadow: 0cap;
-  background-color: bisque;
 }
