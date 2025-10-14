@@ -212,77 +212,183 @@
 
 // export default App;
 
+// import React, { useState } from "react";
+
+// function App() {
+//   const [person, setPerson] = useState({
+//     name: "Niki de Saint Phalle",
+//     artwork: {
+//       title: "Blue Nana",
+//       city: "Hamburg",
+//       image: "https://i.imgur.com/Sd1AgUOm.jpg",
+//     },
+//   });
+
+//   function handleChangeName(e) {
+//     setPerson({ ...person, name: e.target.value });
+//   }
+//   function handleChangeTitle(e) {
+//     setPerson({
+//       ...person,
+//       artwork: {
+//         ...person.artwork,
+//         title: e.target.value,
+//       },
+//     });
+//   }
+
+//   function handleChangeCity(e) {
+//     setPerson({
+//       ...person,
+//       artwork: { ...person.artwork, city: e.target.value },
+//     });
+//   }
+
+//   function handleChangeImage(e) {
+//     setPerson({
+//       ...person,
+//       artwork: {
+//         ...person.artwork,
+//         image: e.target.value,
+//       },
+//     });
+//   }
+//   return (
+//     <div>
+//       <label>
+//         Name :{" "}
+//         <input type="text" value={person.name} onChange={handleChangeName} />
+//       </label>
+//       <br />
+//       <label>
+//         Title
+//         <input value={person.artwork.title} onChange={handleChangeTitle} />
+//       </label>
+//       <br />
+//       <label>
+//         City :
+//         <input
+//           type="text"
+//           value={person.artwork.city}
+//           onChange={handleChangeCity}
+//         />
+//       </label>
+//       <br />
+//       <label>
+//         Image :
+//         <input value={person.artwork.image} onChange={handleChangeImage} />
+//       </label>
+//       <p>
+//         Name : {person.name} title : {person.artwork.title} city :
+//         {person.artwork.city}
+//       </p>
+//       <img src={person.artwork.image} alt={person.artwork.title} />
+//     </div>
+//   );
+// }
+
+// export default App;
+
+// import React, { useState } from "react";
+
+// let nextId = 0;
+
+// function App() {
+//   const [name, setName] = useState("");
+//   const [artists, setArtists] = useState([]);
+
+//   console.log(nextId);
+
+//   return (
+//     <div>
+//       <h1>Sculpture List</h1>
+//       <input
+//         type="text"
+//         value={name}
+//         onChange={(e) => setName(e.target.value)}
+//       />
+//       <button
+//         onClick={() => {
+//           setArtists([...artists, { id: nextId++, name: name }]);
+//         }}
+//       >
+//         Add
+//       </button>
+//       <ul>
+//         {artists.map((artist) => (
+//           <li key={artist.id}>{artist.name}</li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+// DELETE or FILTER
+
+// import React, { useState } from "react";
+// let initialArtists = [
+//   { id: 0, name: "Marta Colvin Andrade" },
+//   { id: 1, name: "Lamidi Olonade Fakeye" },
+//   { id: 2, name: "Louise Nevelson" },
+// ];
+
+// function App() {
+//   const [artists, setArtists] = useState(initialArtists);
+
+//   return (
+//     <div>
+//       <h1>Sculpure Artist List</h1>
+//       <ul>
+//         {artists.map((artist) => (
+//           <li key={artist.id}>
+//             {artist.name}
+//             <button
+//               onClick={() => {
+//                 setArtists(artists.filter((a) => a.id !== artist.id));
+//               }}
+//             >
+//               Delete
+//             </button>
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+// REPLACING ARRAY
+
 import React, { useState } from "react";
+let inaialCounters = [0, 0, 0];
 
 function App() {
-  const [person, setPerson] = useState({
-    name: "Niki de Saint Phalle",
-    artwork: {
-      title: "Blue Nana",
-      city: "Hamburg",
-      image: "https://i.imgur.com/Sd1AgUOm.jpg",
-    },
-  });
+  const [counters, setCounters] = useState(inaialCounters);
 
-  function handleChangeName(e) {
-    setPerson({ ...person, name: e.target.value });
-  }
-  function handleChangeTitle(e) {
-    setPerson({
-      ...person,
-      artwork: {
-        ...person.artwork,
-        title: e.target.value,
-      },
-    });
-  }
-
-  function handleChangeCity(e) {
-    setPerson({
-      ...person,
-      artwork: { ...person.artwork, city: e.target.value },
-    });
-  }
-
-  function handleChangeImage(e) {
-    setPerson({
-      ...person,
-      artwork: {
-        ...person.artwork,
-        image: e.target.value,
-      },
-    });
+  function handleClick(index) {
+    setCounters(
+      counters.map((c, i) => {
+        if (i === index) {
+          return c + 1;
+        } else {
+          return c;
+        }
+      })
+    );
   }
   return (
     <div>
-      <label>
-        Name :{" "}
-        <input type="text" value={person.name} onChange={handleChangeName} />
-      </label>
-      <br />
-      <label>
-        Title
-        <input value={person.artwork.title} onChange={handleChangeTitle} />
-      </label>
-      <br />
-      <label>
-        City :
-        <input
-          type="text"
-          value={person.artwork.city}
-          onChange={handleChangeCity}
-        />
-      </label>
-      <br />
-      <label>
-        Image :
-        <input value={person.artwork.image} onChange={handleChangeImage} />
-      </label>
-      <p>
-        Name : {person.name} title : {person.artwork.title} city :
-        {person.artwork.city}
-      </p>
-      <img src={person.artwork.image} alt={person.artwork.title} />
+      <ul>
+        {counters.map((c, i) => (
+          <li key={i}>
+            {c}
+            <button onClick={() => handleClick(i)}>+1</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
