@@ -484,21 +484,82 @@
 
 // export default App;
 
-import React from "react";
-import Form from "./Form";
+// import React from "react";
+// import Form from "./Form";
+
+// function App() {
+//   const statuses = ["empty", "typing", "submitting", "success", "error"];
+//   return (
+//     <div>
+//       {statuses.map((status) => (
+//         <section key={status}>
+//           <h1>Form {status} :</h1>
+//           <Form status={status} />
+//         </section>
+//       ))}
+//     </div>
+//   );
+// }
+
+// export default App;
+
+import React, { useState } from "react";
 
 function App() {
-  const statuses = ["empty", "typing", "submitting", "success", "error"];
+  const [answer, setAnswer] = useState("");
+  const [error, setError] = useState(null);
+  const [status, setStaus] = useState("typing");
+
+  if (status === "success") {
+    return <h1>you are correct</h1>;
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setStaus("submitting");
+    try {
+      await submitForm(answer);
+      setStaus("success");
+    } catch (err) {
+      setStaus("typing");
+      setError(err);
+    }
+  }
+  function handleChange(e) {
+    setAnswer(e.target.value);
+  }
+
   return (
     <div>
-      {statuses.map((status) => (
-        <section key={status}>
-          <h1>Form {status} :</h1>
-          <Form status={status} />
-        </section>
-      ))}
+      <h1>Quiz</h1>
+      <p>
+        In which city is there a billbord that turns air into drinkable water ?
+      </p>
+      <form onSubmit={handleSubmit}>
+        <textarea
+          value={answer}
+          onChange={handleChange}
+          disabled={status === "submitting"}
+        />
+        <button disabled={answer.length === 0 || status === "submitting"}>
+          submit
+        </button>
+        {error !== null && <p style={{ color: "red" }}> {error.message}</p>}
+      </form>
     </div>
   );
 }
 
+function submitForm(answer) {
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      let shouldError = answer.toLowerCase() !== "lima";
+      if (shouldError) {
+        rej(new Error("Good gues but Wrong Answer. Try Again"));
+      } else {
+        return res();
+      }
+    }, 1000);
+  });
+}
 export default App;
