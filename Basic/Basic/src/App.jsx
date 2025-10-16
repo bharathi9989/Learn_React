@@ -395,66 +395,110 @@
 
 // export default App;
 
-import { useState } from "react";
+// import { useState } from "react";
 
-export default function Form() {
-  const [answer, setAnswer] = useState("");
-  const [error, setError] = useState(null);
-  const [status, setStaus] = useState("typing");
+// export default function Form() {
+//   const [answer, setAnswer] = useState("");
+//   const [error, setError] = useState(null);
+//   const [status, setStaus] = useState("typing");
 
-  if (status === "success") {
-    return <h1>Thats Right✅</h1>;
-  }
+//   if (status === "success") {
+//     return <h1>Thats Right✅</h1>;
+//   }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setStaus("submitting");
-    try {
-      await submitForm(answer);
-      setStaus("success");
-    } catch (err) {
-      setStaus("typing");
-      setError(err);
-    }
-  }
+//   async function handleSubmit(e) {
+//     e.preventDefault();
+//     setStaus("submitting");
+//     try {
+//       await submitForm(answer);
+//       setStaus("success");
+//     } catch (err) {
+//       setStaus("typing");
+//       setError(err);
+//     }
+//   }
 
-  function handleTextAreaChange(e) {
-    setAnswer(e.target.value);
-  }
+//   function handleTextAreaChange(e) {
+//     setAnswer(e.target.value);
+//   }
 
+//   return (
+//     <>
+//       <h2>City Quiz</h2>
+
+//       <p>
+//         In which city is there a billboard that turns air into drinkable water?
+//       </p>
+//       <form onSubmit={handleSubmit}>
+//         <textarea
+//           value={answer}
+//           onChange={handleTextAreaChange}
+//           disabled={status === "submitting"}
+//         ></textarea>
+//         <br />
+//         <button disabled={answer.length === 0 || status === "submitting"}>
+//           Submit
+//         </button>
+
+//         {error !== null && <p style={{ color: "red" }}>{error.message}</p>}
+//       </form>
+//     </>
+//   );
+// }
+
+// function submitForm(answer) {
+//   return new Promise((res, rej) => {
+//     setTimeout(() => {
+//       let shouldCorrect = answer.toLowerCase() === "lima";
+//       if (shouldCorrect) {
+//         return res();
+//       } else {
+//         rej(new Error("Good guess but a wrong answer. Try again!"));
+//       }
+//     }, 1500);
+//   });
+// }
+
+// import React from "react";
+
+// function App({ status = "empty" }) {
+//   if (status === "success") {
+//     return <h1>Thats correct ✅</h1>;
+//   }
+//   return (
+//     <div>
+//       <h1>Quiz Task</h1>
+//       <p>
+//         In which city is there a billboard that turns air into drinkable water?
+//       </p>
+//       <form>
+//         <textarea disabled={status === "submitting"}></textarea>
+//         <br />
+//         <button disabled={status === "empty" || status === "submitting"}>
+//           Submit
+//         </button>
+//       </form>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+import React from "react";
+import Form from "./Form";
+
+function App() {
+  const statuses = ["empty", "typing", "submitting", "success", "error"];
   return (
-    <>
-      <h2>City Quiz</h2>
-
-      <p>
-        In which city is there a billboard that turns air into drinkable water?
-      </p>
-      <form onSubmit={handleSubmit}>
-        <textarea
-          value={answer}
-          onChange={handleTextAreaChange}
-          disabled={status === "submitting"}
-        ></textarea>
-        <br />
-        <button disabled={answer.length === 0 || status === "submitting"}>
-          Submit
-        </button>
-
-        {error !== null && <p style={{ color: "red" }}>{error.message}</p>}
-      </form>
-    </>
+    <div>
+      {statuses.map((status) => (
+        <section key={status}>
+          <h1>Form {status} :</h1>
+          <Form status={status} />
+        </section>
+      ))}
+    </div>
   );
 }
 
-function submitForm(answer) {
-  return new Promise((res, rej) => {
-    setTimeout(() => {
-      let shouldCorrect = answer.toLowerCase() === "lima";
-      if (shouldCorrect) {
-        return res();
-      } else {
-        rej(new Error("Good guess but a wrong answer. Try again!"));
-      }
-    }, 1500);
-  });
-}
+export default App;
