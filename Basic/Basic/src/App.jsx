@@ -503,63 +503,121 @@
 
 // export default App;
 
-import React, { useState } from "react";
+// import React, { useState } from "react";
+
+// function App() {
+//   const [answer, setAnswer] = useState("");
+//   const [error, setError] = useState(null);
+//   const [status, setStaus] = useState("typing");
+
+//   if (status === "success") {
+//     return <h1>you are correct</h1>;
+//   }
+
+//   async function handleSubmit(e) {
+//     e.preventDefault();
+//     setStaus("submitting");
+//     try {
+//       await submitForm(answer);
+//       setStaus("success");
+//     } catch (err) {
+//       setStaus("typing");
+//       setError(err);
+//     }
+//   }
+//   function handleChange(e) {
+//     setAnswer(e.target.value);
+//   }
+
+//   return (
+//     <div>
+//       <h1>Quiz</h1>
+//       <p>
+//         In which city is there a billbord that turns air into drinkable water ?
+//       </p>
+//       <form onSubmit={handleSubmit}>
+//         <textarea
+//           value={answer}
+//           onChange={handleChange}
+//           disabled={status === "submitting"}
+//         />
+//         <button disabled={answer.length === 0 || status === "submitting"}>
+//           submit
+//         </button>
+//         {error !== null && <p style={{ color: "red" }}> {error.message}</p>}
+//       </form>
+//     </div>
+//   );
+// }
+
+// function submitForm(answer) {
+//   return new Promise((res, rej) => {
+//     setTimeout(() => {
+//       let shouldError = answer.toLowerCase() !== "lima";
+//       if (shouldError) {
+//         rej(new Error("Good gues but Wrong Answer. Try Again"));
+//       } else {
+//         return res();
+//       }
+//     }, 1000);
+//   });
+// }
+// export default App;
+
+// Red Dot Moving Task
+
+// import React, { useState } from "react";
+
+// function App() {
+//   const [position, setPosition] = useState({ x: 0, y: 0 });
+
+//   return (
+//     <div
+//       onPointerMove={(e) =>
+//         setPosition({
+//           x: e.clientX,
+//           y: e.clientY,
+//         })
+//       }
+//     >
+//       <div
+//         style={{
+//           position: "absolute",
+//           backgroundColor: "red",
+//           borderRadius: "50%",
+//           transform: `translate(${position.x}px, ${position.y}px)`,
+//           left: -10,
+//           top: -10,
+//           width: 20,
+//           height: 20,
+//         }}
+//       ></div>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+import React from "react";
+import Panel from "./Panel";
 
 function App() {
-  const [answer, setAnswer] = useState("");
-  const [error, setError] = useState(null);
-  const [status, setStaus] = useState("typing");
-
-  if (status === "success") {
-    return <h1>you are correct</h1>;
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setStaus("submitting");
-    try {
-      await submitForm(answer);
-      setStaus("success");
-    } catch (err) {
-      setStaus("typing");
-      setError(err);
-    }
-  }
-  function handleChange(e) {
-    setAnswer(e.target.value);
-  }
-
   return (
     <div>
-      <h1>Quiz</h1>
-      <p>
-        In which city is there a billbord that turns air into drinkable water ?
-      </p>
-      <form onSubmit={handleSubmit}>
-        <textarea
-          value={answer}
-          onChange={handleChange}
-          disabled={status === "submitting"}
-        />
-        <button disabled={answer.length === 0 || status === "submitting"}>
-          submit
-        </button>
-        {error !== null && <p style={{ color: "red" }}> {error.message}</p>}
-      </form>
+      <h1>Almaty , kazakasthan</h1>
+      <Panel title="About">
+        With a population of about 2 million, Almaty is Kazakhstan's largest
+        city. From 1929 to 1997, it was its capital city.
+      </Panel>
+      <Panel title="Etymology">
+        The name comes from <span lang="kk-KZ">алма</span>, the Kazakh word for
+        "apple" and is often translated as "full of apples". In fact, the region
+        surrounding Almaty is thought to be the ancestral home of the apple, and
+        the wild <i lang="la">Malus sieversii</i> is considered a likely
+        candidate for the ancestor of the modern domestic apple.
+      </Panel>
     </div>
   );
 }
 
-function submitForm(answer) {
-  return new Promise((res, rej) => {
-    setTimeout(() => {
-      let shouldError = answer.toLowerCase() !== "lima";
-      if (shouldError) {
-        rej(new Error("Good gues but Wrong Answer. Try Again"));
-      } else {
-        return res();
-      }
-    }, 1000);
-  });
-}
 export default App;
