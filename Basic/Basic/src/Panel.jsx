@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 
-function Panel({ title, children, isActive, onShow }) {
-  return (
-    <div>
-      <h1>{title}</h1>
+// function Panel({ title, children, isActive, onShow }) {
+//   return (
+//     <div>
+//       <h1>{title}</h1>
 
-      {isActive ? <p>{children}</p> : <button onClick={onShow}>Show </button>}
-    </div>
-  );
-}
+//       {isActive ? <p>{children}</p> : <button onClick={onShow}>Show </button>}
+//     </div>
+//   );
+// }
 
-export default Panel;
+// export default Panel;

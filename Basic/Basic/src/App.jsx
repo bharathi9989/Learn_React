@@ -598,36 +598,107 @@
 
 // export default App;
 
-import React, { useState } from "react";
-import Panel from "./Panel";
+// import React, { useState } from "react";
+// import Panel from "./Panel";
 
-function App() {
-  const [activeIndex, setActiveIndex] = useState(0);
+// function App() {
+//   const [activeIndex, setActiveIndex] = useState(0);
+
+//   return (
+//     <div>
+//       <h1>Almaty , kazakasthan</h1>
+//       <Panel
+//         title="About"
+//         isActive={activeIndex === 0}
+//         onShow={() => setActiveIndex(0)}
+//       >
+//         With a population of about 2 million, Almaty is Kazakhstan's largest
+//         city. From 1929 to 1997, it was its capital city.
+//       </Panel>
+//       <Panel
+//         title="Etymology"
+//         isActive={activeIndex === 1}
+//         onShow={() => setActiveIndex(1)}
+//       >
+//         The name comes from <span lang="kk-KZ">алма</span>, the Kazakh word for
+//         "apple" and is often translated as "full of apples". In fact, the region
+//         surrounding Almaty is thought to be the ancestral home of the apple, and
+//         the wild <i lang="la">Malus sieversii</i> is considered a likely
+//         candidate for the ancestor of the modern domestic apple.
+//       </Panel>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+// import React, { useState } from "react";
+
+// function App() {
+//   const [text, setText] = useState("");
+
+//   function handleChange(e) {
+//     setText(e.target.value);
+//   }
+//   return (
+//     <div>
+//       <Input label="first input" value={text} onChange={handleChange} />
+//       <Input label="second input" value={text} onChange={handleChange} />
+//     </div>
+//   );
+// }
+
+// function Input({ label, value, onChange }) {
+//   return (
+//     <>
+//       <label>
+//         {label}
+//         <input value={value} onChange={onChange} />
+//       </label>
+//     </>
+//   );
+// }
+// export default App;
+
+import { useState } from "react";
+import { foods, filterItems } from "./data.jsx";
+
+export default function App() {
+  const [query, setQuery] = useState("");
+  const results = filterItems(foods, query);
+
+  function handleChange(e) {
+    setQuery(e.target.value);
+  }
 
   return (
-    <div>
-      <h1>Almaty , kazakasthan</h1>
-      <Panel
-        title="About"
-        isActive={activeIndex === 0}
-        onShow={() => setActiveIndex(0)}
-      >
-        With a population of about 2 million, Almaty is Kazakhstan's largest
-        city. From 1929 to 1997, it was its capital city.
-      </Panel>
-      <Panel
-        title="Etymology"
-        isActive={activeIndex === 1}
-        onShow={() => setActiveIndex(1)}
-      >
-        The name comes from <span lang="kk-KZ">алма</span>, the Kazakh word for
-        "apple" and is often translated as "full of apples". In fact, the region
-        surrounding Almaty is thought to be the ancestral home of the apple, and
-        the wild <i lang="la">Malus sieversii</i> is considered a likely
-        candidate for the ancestor of the modern domestic apple.
-      </Panel>
-    </div>
+    <>
+      <SearchBar query={query} onChange={handleChange} />
+      <hr />
+      <List items={results} />
+    </>
   );
 }
 
-export default App;
+function SearchBar({ query, onChange }) {
+  return (
+    <label>
+      Search: <input value={query} onChange={onChange} />
+    </label>
+  );
+}
+
+function List({ items }) {
+  return (
+    <table>
+      <tbody>
+        {items.map((food) => (
+          <tr key={food.id}>
+            <td>{food.name}</td>
+            <td>{food.description}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
