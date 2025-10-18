@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 
-function Panel({ title, children }) {
-  const [isActive, setIsActive] = useState(false);
+function Panel({ title, children, isActive, onShow }) {
   return (
     <div>
       <h1>{title}</h1>
 
-      {isActive ? (
-        <p>{children}</p>
-      ) : (
-        <button onClick={() => setIsActive(true)}>Show </button>
-      )}
+      {isActive ? <p>{children}</p> : <button onClick={onShow}>Show </button>}
     </div>
   );
 }
