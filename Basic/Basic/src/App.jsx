@@ -661,7 +661,7 @@
 // export default App;
 
 import { useState } from "react";
-import { foods, filterItems } from "./data.jsx";
+import { foods, filterItems } from "./data.js'x";
 
 export default function App() {
   const [query, setQuery] = useState("");
